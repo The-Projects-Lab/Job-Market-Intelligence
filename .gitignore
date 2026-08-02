@@ -1,0 +1,54 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Python environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache/build output
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Jupyter/local tooling
+.ipynb_checkpoints/
+.streamlit/secrets.toml
+
+# Generated datasets and exports
+data/raw/
+data/backup/
+data/processed/
+data/gold/
+data/gold_v2/
+data/gold_v3/
+data/tableau/
+data/*.csv
+data/*.zip
+project_sample_data/
+
+# Model/vector artifacts
+models/
+vector_db/
+*.pkl
+*.pickle
+*.joblib
+
+# Logs and OS/editor files
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local helper scripts that rewrite git history
+commit.sh
