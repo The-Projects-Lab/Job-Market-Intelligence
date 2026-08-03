@@ -686,21 +686,29 @@ def load_csv(path):
 
 
 @st.cache_data
-def load_csv(path: Path) -> pd.DataFrame:
-    """Helper to load dataframe, checking for .csv.gz if .csv is not found."""
-    # Ensure path is a Path object
-    path = Path(path)
-    
-    # Check if path ends in .csv, try .csv.gz version
-    gz_path = path.with_suffix(".csv.gz") if path.suffix == ".csv" else path
-    
-    if gz_path.exists():
-        return pd.read_csv(gz_path)
-    elif path.exists():
-        return pd.read_csv(path)
-    else:
-        st.warning(f"File not found: {path.name} or {gz_path.name}")
+def load_gold_data(path_or_str):
+    """Safely load .csv or .csv.gz data into a DataFrame."""
+    if path_or_str is None:
         return pd.DataFrame()
+        
+    path = Path(path_or_str)
+    
+    # 1. Check direct path (.csv.gz or .csv)
+    if path.exists():
+        return pd.read_csv(path)
+    
+    # 2. Check if .csv was passed, but .csv.gz exists
+    if path.suffix == ".csv":
+        gz_path = path.with_suffix(".csv.gz")
+        if gz_path.exists():
+            return pd.read_csv(gz_path)
+            
+    # 3. Check if path was missing extension or .gz extension
+    gz_direct = Path(str(path) + ".gz") if not str(path).endswith(".gz") else path
+    if gz_direct.exists():
+        return pd.read_csv(gz_direct)
+
+    return pd.DataFrame()
 
 
 @st.cache_resource
