@@ -52,3 +52,9 @@ Thumbs.db
 
 # Local helper scripts that rewrite git history
 commit.sh
+
+# Ignore raw large CSVs
+data/gold_v3/*.csv
+
+# Allow compressed archives
+!data/gold_v3/*.csv.gz

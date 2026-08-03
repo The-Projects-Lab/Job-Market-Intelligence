@@ -30,7 +30,7 @@ load_dotenv(BASE_DIR / ".env")
 GOLD_DIR = BASE_DIR / "data" / "gold_v3"
 MODEL_DIR = BASE_DIR / "models"
 
-JOBS_PATH = GOLD_DIR / "jobs_gold.csv"
+JOBS_PATH = GOLD_DIR / "jobs_gold.csv.gz"
 SKILL_DEMAND_PATH = GOLD_DIR / "skill_demand.csv"
 ROLE_DEMAND_PATH = GOLD_DIR / "role_demand.csv"
 COMPANY_DEMAND_PATH = GOLD_DIR / "company_demand.csv"
