@@ -166,3 +166,4 @@ einops
 groq
 python-dotenv
 pydantic
+plotly
