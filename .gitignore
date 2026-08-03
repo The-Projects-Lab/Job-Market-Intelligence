@@ -30,9 +30,9 @@ data/backup/
 data/processed/
 data/gold/
 data/gold_v2/
-data/gold_v3/
+# data/gold_v3/
 data/tableau/
-data/*.csv
+# data/*.csv
 data/*.zip
 project_sample_data/
 
