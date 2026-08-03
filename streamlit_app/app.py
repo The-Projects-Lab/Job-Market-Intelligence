@@ -686,17 +686,21 @@ def load_csv(path):
 
 
 @st.cache_data
-def load_gold_data():
-    data = {
-        "jobs": load_csv(JOBS_PATH),
-        "skill_demand": load_csv(SKILL_DEMAND_PATH),
-        "role_demand": load_csv(ROLE_DEMAND_PATH),
-        "company_demand": load_csv(COMPANY_DEMAND_PATH),
-        "location_demand": load_csv(LOCATION_DEMAND_PATH),
-        "salary_insights": load_csv(SALARY_INSIGHTS_PATH),
-        "source_quality": load_csv(SOURCE_QUALITY_PATH),
-    }
-    return data
+def load_csv(path: Path) -> pd.DataFrame:
+    """Helper to load dataframe, checking for .csv.gz if .csv is not found."""
+    # Ensure path is a Path object
+    path = Path(path)
+    
+    # Check if path ends in .csv, try .csv.gz version
+    gz_path = path.with_suffix(".csv.gz") if path.suffix == ".csv" else path
+    
+    if gz_path.exists():
+        return pd.read_csv(gz_path)
+    elif path.exists():
+        return pd.read_csv(path)
+    else:
+        st.warning(f"File not found: {path.name} or {gz_path.name}")
+        return pd.DataFrame()
 
 
 @st.cache_resource
