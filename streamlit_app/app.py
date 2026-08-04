@@ -30,13 +30,13 @@ load_dotenv(BASE_DIR / ".env")
 GOLD_DIR = BASE_DIR / "data" / "gold_v3"
 MODEL_DIR = BASE_DIR / "models"
 
-JOBS_PATH = GOLD_DIR / "jobs_gold.csv.gz"
-SKILL_DEMAND_PATH = GOLD_DIR / "skill_demand.csv.gz"
-ROLE_DEMAND_PATH = GOLD_DIR / "role_demand.csv.gz"
-COMPANY_DEMAND_PATH = GOLD_DIR / "company_demand.csv.gz"
-LOCATION_DEMAND_PATH = GOLD_DIR / "location_demand.csv.gz"
-SALARY_INSIGHTS_PATH = GOLD_DIR / "salary_insights.csv.gz"
-SOURCE_QUALITY_PATH = GOLD_DIR / "source_quality.csv.gz"
+JOBS_PATH = GOLD_DIR / "jobs_gold.csv"
+SKILL_DEMAND_PATH = GOLD_DIR / "skill_demand.csv"
+ROLE_DEMAND_PATH = GOLD_DIR / "role_demand.csv"
+COMPANY_DEMAND_PATH = GOLD_DIR / "company_demand.csv"
+LOCATION_DEMAND_PATH = GOLD_DIR / "location_demand.csv"
+SALARY_INSIGHTS_PATH = GOLD_DIR / "salary_insights.csv"
+SOURCE_QUALITY_PATH = GOLD_DIR / "source_quality.csv"
 
 RECOMMENDER_DIR = MODEL_DIR / "job_recommender"
 RECOMMENDER_VECTORIZER_PATH = RECOMMENDER_DIR / "tfidf_vectorizer.pkl"
@@ -686,29 +686,17 @@ def load_csv(path):
 
 
 @st.cache_data
-def load_gold_data(path_or_str):
-    """Safely load .csv or .csv.gz data into a DataFrame."""
-    if path_or_str is None:
-        return pd.DataFrame()
-        
-    path = Path(path_or_str)
-    
-    # 1. Check direct path (.csv.gz or .csv)
-    if path.exists():
-        return pd.read_csv(path)
-    
-    # 2. Check if .csv was passed, but .csv.gz exists
-    if path.suffix == ".csv":
-        gz_path = path.with_suffix(".csv.gz")
-        if gz_path.exists():
-            return pd.read_csv(gz_path)
-            
-    # 3. Check if path was missing extension or .gz extension
-    gz_direct = Path(str(path) + ".gz") if not str(path).endswith(".gz") else path
-    if gz_direct.exists():
-        return pd.read_csv(gz_direct)
-
-    return pd.DataFrame()
+def load_gold_data():
+    data = {
+        "jobs": load_csv(JOBS_PATH),
+        "skill_demand": load_csv(SKILL_DEMAND_PATH),
+        "role_demand": load_csv(ROLE_DEMAND_PATH),
+        "company_demand": load_csv(COMPANY_DEMAND_PATH),
+        "location_demand": load_csv(LOCATION_DEMAND_PATH),
+        "salary_insights": load_csv(SALARY_INSIGHTS_PATH),
+        "source_quality": load_csv(SOURCE_QUALITY_PATH),
+    }
+    return data
 
 
 @st.cache_resource
