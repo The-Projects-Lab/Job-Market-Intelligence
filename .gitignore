@@ -55,3 +55,9 @@ data/gold_v3/*.csv
 
 # Allow compressed archives
 !data/gold_v3/*.csv.gz
+
+# Allow ML model artifacts in the models directory
+!models/
+!models/**/*.pkl
+!models/**/*.joblib
+!models/**/*.pkl.gz
