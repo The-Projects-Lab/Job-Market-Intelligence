@@ -1063,7 +1063,15 @@ def generate_market_context(data, predicted_role=None, skill_gap=None, recommend
 # LOAD DATA
 # ============================================================
 
-data = load_gold_data()
+data = {
+    "jobs": load_gold_data(JOBS_PATH),
+    "skill_demand": load_gold_data(SKILL_DEMAND_PATH),
+    "role_demand": load_gold_data(ROLE_DEMAND_PATH),
+    "company_demand": load_gold_data(COMPANY_DEMAND_PATH),
+    "location_demand": load_gold_data(LOCATION_DEMAND_PATH),
+    "salary_insights": load_gold_data(SALARY_INSIGHTS_PATH),
+    "source_quality": load_gold_data(SOURCE_QUALITY_PATH),
+}
 jobs = data["jobs"]
 skill_demand = data["skill_demand"]
 role_demand = data["role_demand"]
