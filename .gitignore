@@ -37,11 +37,8 @@ data/*.zip
 project_sample_data/
 
 # Model/vector artifacts
-models/
 vector_db/
-*.pkl
 *.pickle
-*.joblib
 
 # Logs and OS/editor files
 *.log
