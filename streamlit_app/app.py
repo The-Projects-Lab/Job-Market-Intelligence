@@ -685,18 +685,38 @@ def load_csv(path):
     return pd.read_csv(path, low_memory=False)
 
 
+
 @st.cache_data
-def load_gold_data():
-    data = {
-        "jobs": load_csv(JOBS_PATH),
-        "skill_demand": load_csv(SKILL_DEMAND_PATH),
-        "role_demand": load_csv(ROLE_DEMAND_PATH),
-        "company_demand": load_csv(COMPANY_DEMAND_PATH),
-        "location_demand": load_csv(LOCATION_DEMAND_PATH),
-        "salary_insights": load_csv(SALARY_INSIGHTS_PATH),
-        "source_quality": load_csv(SOURCE_QUALITY_PATH),
-    }
-    return data
+def load_gold_data(path_or_str):
+    if path_or_str is None:
+        return pd.DataFrame()
+        
+    path = Path(path_or_str)
+    
+    if path.exists():
+        return pd.read_csv(path)
+    
+    if path.suffix == ".csv":
+        gz_path = path.with_suffix(".csv.gz")
+        if gz_path.exists():
+            return pd.read_csv(gz_path)
+            
+    gz_direct = Path(str(path) + ".gz") if not str(path).endswith(".gz") else path
+    if gz_direct.exists():
+        return pd.read_csv(gz_direct)
+
+    return pd.DataFrame()
+
+
+data = {
+    "jobs": load_gold_data(JOBS_PATH),
+    "skill_demand": load_gold_data(SKILL_DEMAND_PATH),
+    "role_demand": load_gold_data(ROLE_DEMAND_PATH),
+    "company_demand": load_gold_data(COMPANY_DEMAND_PATH),
+    "location_demand": load_gold_data(LOCATION_DEMAND_PATH),
+    "salary_insights": load_gold_data(SALARY_INSIGHTS_PATH),
+    "source_quality": load_gold_data(SOURCE_QUALITY_PATH),
+}
 
 
 @st.cache_resource
