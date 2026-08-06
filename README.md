@@ -2,6 +2,8 @@
 
 ## AI-Powered Job Analytics, Career Intelligence & RAG Assistant
 
+🌐 **Live Application:** http://43.204.45.12:8501/
+
 An end-to-end **Data Engineering + Machine Learning + Generative AI**
 platform that automatically collects job postings from multiple
 recruitment portals, transforms them into analytics-ready datasets using
