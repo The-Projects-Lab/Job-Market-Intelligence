@@ -19,7 +19,7 @@ class GroqProvider(BaseLLMProvider):
             raise ValueError("GROQ_API_KEY environment variable is not set.")
         
         self.client = Groq(api_key=api_key)
-        self.model_name = model_name or os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+        self.model_name = model_name or os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 
     def generate(self, prompt: str, system_prompt: Optional[str] = None) -> str:
         messages = []
