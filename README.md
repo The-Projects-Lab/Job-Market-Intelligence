@@ -3,6 +3,7 @@
 ## AI-Powered Job Analytics, Career Intelligence & RAG Assistant
 
 🌐 **Live Application:** http://43.204.45.12:8501/
+Streamlit : ** https://job-recommender-ai.streamlit.app/
 
 An end-to-end **Data Engineering + Machine Learning + Generative AI**
 platform that automatically collects job postings from multiple
